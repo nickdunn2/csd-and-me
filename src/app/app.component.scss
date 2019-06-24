@@ -4,7 +4,7 @@
     grid-template-rows: 1fr 3fr;
     grid-column-gap: 1px;
     grid-row-gap: 1px;
-    background-color: black;
+    background-color: gray;
 
     @media screen and (min-width: 500px) {
         grid-template-columns: 1fr 1fr 1fr;
