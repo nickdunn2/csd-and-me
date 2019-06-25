@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { AuthService } from '../auth.service'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-login',
@@ -21,10 +22,11 @@ export class LoginComponent {
   }
 
   public login() {
-    const val = this.loginForm.value
+    const creds = this.loginForm.value
 
-    if (val.email && val.password) {
-      this.auth.login(val.email, val.password)
+    if (creds.email && creds.password) {
+      this.auth.login(creds)
+        .pipe(take(1)).subscribe()
     }
   }
 }
