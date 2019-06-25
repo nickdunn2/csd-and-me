@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component'
 import { LoginComponent } from './login/login.component'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LoginComponent } from './login/login.component'
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

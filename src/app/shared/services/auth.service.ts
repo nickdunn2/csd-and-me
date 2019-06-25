@@ -44,7 +44,7 @@ export class AuthService {
   private setSession(token: IToken): void {
     localStorage.setItem('id_token', token.id_token)
     localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
-    this.isLoggedInSubject.next(true)
+    this.isLoggedInSubject.next(true) // TODO: this is throwing an error
   }
 
   /* Taken directly from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
