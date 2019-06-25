@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm">
+<form *ngIf="!(loggedIn$ | async)" [formGroup]="loginForm">
   <fieldset>
     <legend>Login</legend>
     <div class="form-field">
@@ -14,3 +14,7 @@
     <button class="button button-primary" (click)="login()">Log In</button>
   </div>
 </form>
+<div *ngIf="(loggedIn$ | async)">
+  you're logged in yippee
+  <button class="button button-primary" (click)="logout()">Log Out</button>
+</div>

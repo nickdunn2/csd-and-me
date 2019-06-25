@@ -10,6 +10,7 @@ import { take } from 'rxjs/operators'
 })
 export class LoginComponent {
   public loginForm: FormGroup;
+  public loggedIn$ = this.auth.isLoggedIn$
 
   constructor(
     private fb: FormBuilder,
@@ -28,5 +29,9 @@ export class LoginComponent {
       this.auth.login(creds)
         .pipe(take(1)).subscribe()
     }
+  }
+
+  public logout() {
+    this.auth.logout()
   }
 }

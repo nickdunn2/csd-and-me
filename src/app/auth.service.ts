@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { shareReplay, tap, map, catchError } from 'rxjs/operators'
-import { throwError } from 'rxjs'
+import { throwError, BehaviorSubject } from 'rxjs'
 import * as moment from 'moment'
 
 @Injectable({
@@ -9,6 +9,8 @@ import * as moment from 'moment'
 })
 export class AuthService {
   private STAGING_BASE_URL = 'https://staging-api.flosports.tv'
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken)
+  public isLoggedIn$ = this.isLoggedInSubject.asObservable()
 
   constructor(private http: HttpClient) { }
 
@@ -17,9 +19,32 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         map(mapITokenResponseToIToken),
-        tap(setSession),
+        tap(this.setSession),
         shareReplay(1)
       )
+  }
+
+  public logout() {
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('expires_at')
+    this.isLoggedInSubject.next(false)
+  }
+
+  /**
+   * If there is an 'id_token' that is not expired, then the user is logged in.
+   */
+  private get hasValidToken() {
+    return !!localStorage.getItem('id_token') && moment().isBefore(this.jwtExpiration)
+  }
+
+  private get jwtExpiration() {
+    return moment(JSON.parse(localStorage.getItem('expires_at')))
+  }
+
+  private setSession(token: IToken): void {
+    localStorage.setItem('id_token', token.id_token)
+    localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
+    this.isLoggedInSubject.next(true)
   }
 
   /* Taken directly from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
@@ -66,7 +91,3 @@ export function mapITokenResponseToIToken(tokenResponse: ITokenResponse): IToken
   }
 }
 
-export function setSession(token: IToken): void {
-  localStorage.setItem('id_token', token.id_token)
-  localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
-}
