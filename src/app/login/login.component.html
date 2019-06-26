@@ -1,19 +1,22 @@
-<form *ngIf="!(loggedIn$ | async)" [formGroup]="loginForm">
-  <fieldset>
-    <legend>Login</legend>
-    <div class="form-field">
-      <label>Email:</label>
-      <input name="email" formControlName="email">
+<div class="login-form-wrapper">
+  <form *ngIf="!(loggedIn$ | async)" class="login-form" [formGroup]="loginForm">
+    <fieldset>
+      <legend>Login</legend>
+      <div class="form-field">
+        <label for="email-input">Email:</label>
+        <input id="email-input" name="email" formControlName="email">
+      </div>
+      <div class="form-field">
+        <label for="password-input">Password:</label>
+        <input id="password-input" name="password" formControlName="password" type="password">
+      </div>
+    </fieldset>
+    <div class="form-buttons">
+      <button type="submit" class="button button-primary" (click)="login()">Log In</button>
     </div>
-    <div class="form-field">
-      <label>Password:</label>
-      <input name="password" formControlName="password" type="password">
-    </div>
-  </fieldset>
-  <div class="form-buttons">
-    <button class="button button-primary" (click)="login()">Log In</button>
-  </div>
-</form>
+  </form>
+</div>
+
 <div *ngIf="(loggedIn$ | async)">
   you're logged in yippee
   <button class="button button-primary" (click)="logout()">Log Out</button>
