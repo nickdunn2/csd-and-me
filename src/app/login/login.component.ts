@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { take } from 'rxjs/operators'
-import { AuthService } from '../shared/services/auth.service'
+import { AuthService, ILoginError } from '../shared/services/auth.service'
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import { AuthService } from '../shared/services/auth.service'
 export class LoginComponent {
   public loginForm: FormGroup;
   public loggedIn$ = this.auth.isLoggedIn$
+  public loginErrorSubject = new Subject<ILoginError | undefined>()
+  public loginError$ = this.loginErrorSubject.asObservable()
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +30,14 @@ export class LoginComponent {
 
     if (creds.email && creds.password) {
       this.auth.login(creds)
-        .pipe(take(1)).subscribe()
+        .pipe(take(1))
+        .subscribe(res => {
+          console.log('login res', res)
+        },
+          error => {
+            console.error('login error', error)
+            this.loginErrorSubject.next(error)
+          })
     }
   }
 

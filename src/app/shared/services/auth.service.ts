@@ -17,7 +17,7 @@ export class AuthService {
   public login(credentials: ILoginCredentials) {
     return this.http.post<ITokenResponse>(`${this.STAGING_BASE_URL}/api/tokens`, credentials)
       .pipe(
-        catchError(this.handleError),
+        catchError(handleLoginError),
         map(mapITokenResponseToIToken),
         tap(this.setSession),
         shareReplay(1)
@@ -46,23 +46,6 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
     this.isLoggedInSubject.next(true) // TODO: this is throwing an error
   }
-
-  /* Taken directly from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('A client-side or network error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error.message}`);
-    }
-    // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
-  };
 }
 
 export interface ILoginCredentials {
@@ -84,10 +67,31 @@ export interface IToken {
   expires_at: number // TODO: timestamp type?
 }
 
+export interface ILoginError {
+  status: number
+  message: string
+}
+
 export function mapITokenResponseToIToken(tokenResponse: ITokenResponse): IToken {
   return {
     id_token: tokenResponse.token,
     expires_at: tokenResponse.exp
+  }
+}
+
+/* Slightly modified from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
+export function handleLoginError(errorResponse: HttpErrorResponse) {
+  const msg = !errorResponse.error ? 'Whoops! An unknown error occurred.'
+    : errorResponse.error instanceof ErrorEvent ? buildLoginErrorMessage(errorResponse.status, `Whoops! A network error occurred: ${errorResponse.error.message}. Please try again.`)
+      : buildLoginErrorMessage(errorResponse.status, errorResponse.error.message)
+
+  return throwError(msg)
+}
+
+export function buildLoginErrorMessage(status: number, message: string): ILoginError {
+  return {
+    status,
+    message
   }
 }
 

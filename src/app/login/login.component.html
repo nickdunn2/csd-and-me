@@ -16,6 +16,9 @@
     </div>
   </form>
 </div>
+<div *ngIf="(loginError$ | async) as loginError">
+  <p>{{ loginError.message }}</p>
+</div>
 
 <div *ngIf="(loggedIn$ | async)">
   you're logged in yippee
