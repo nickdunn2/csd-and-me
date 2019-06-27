@@ -1,7 +1,20 @@
 .login-form-wrapper {
   display: grid;
+  height: 100%;
+  background: linear-gradient(
+    to right bottom, 
+    #b4b4b4, 
+    #3b3b3b);
+  align-items: center;
+  border: 1px solid purple;
 
   .login-form {
+    background: transparent;
+    height: 50%;
+    width: 300px;
     justify-self: center;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid orange;
   }
 }
