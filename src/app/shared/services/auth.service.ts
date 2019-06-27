@@ -30,6 +30,10 @@ export class AuthService {
     this.isLoggedInSubject.next(false)
   }
 
+  public updateLoggedIn(loggedIn: boolean) {
+    this.isLoggedInSubject.next(loggedIn)
+  }
+
   /**
    * If there is an 'id_token' that is not expired, then the user is logged in.
    */
@@ -44,7 +48,6 @@ export class AuthService {
   private setSession(token: IToken): void {
     localStorage.setItem('id_token', token.id_token)
     localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
-    this.isLoggedInSubject.next(true) // TODO: this is throwing an error
   }
 }
 

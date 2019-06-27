@@ -33,6 +33,7 @@ export class LoginComponent {
         .pipe(take(1))
         .subscribe(res => {
           console.log('login res', res)
+          this.auth.updateLoggedIn(true)
         },
           error => {
             console.error('login error', error)
