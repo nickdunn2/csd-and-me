@@ -15,7 +15,7 @@
         placeholder="Password">
     </div>
     <div *ngIf="(loginError$ | async) as loginError">
-      <p>{{ loginError.message }}</p>
+      <p class="error-msg">{{ loginError.message }}</p>
     </div>
     <div class="form-button">
       <button type="submit" class="button submit-button" (click)="login()">Log In</button>
