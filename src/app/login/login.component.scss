@@ -17,12 +17,11 @@ $grey-text-color: #5c5c5c;
 
   .login-form {
     background: #ececec;
-    // height: 50%;
     width: 300px;
     justify-self: center;
     text-align: center;
     padding: 20px;
-    border: 1px solid orange;
+    border-radius: 4px;
 
     .form-field {
       display: grid;
@@ -33,16 +32,18 @@ $grey-text-color: #5c5c5c;
       background-color: #fff;
       overflow: hidden;
       margin-bottom: 10px;
+      -moz-box-shadow: 5px 10px;
+      -webkit-box-shadow: 5px 10px;
+      box-shadow: 1px 2px 5px;
 
       .form-input {
         border: none;
-        font-size: 18px;
+        font-size: 16px;
         font-family: $primary-font-family;
         padding: 10px 15px;
         color: $grey-text-color;
         outline: none;
         line-height: 1.5;
-        width: calc(100% - 50px);
       }
 
       .icon-wrapper {
@@ -53,6 +54,26 @@ $grey-text-color: #5c5c5c;
         span.icon {
           color: #fff;
         }
+      }
+    }
+
+    .submit-button {
+      width: 100%;
+      background-color: $medium-green;
+      font-size: 18px;
+      font-family: $primary-font-family;
+      font-weight: 300;
+      color: #fff;
+      border: none;
+      padding: 10px 0;
+      border-radius: 4px;
+      margin-top: 15px;
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        transform: translateY(-2px);
+        transition: transform 0.2s ease 0s;
       }
     }
   }

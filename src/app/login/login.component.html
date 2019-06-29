@@ -14,13 +14,13 @@
       <input id="password-input" class="form-input" name="password" formControlName="password" type="password"
         placeholder="Password">
     </div>
+    <div *ngIf="(loginError$ | async) as loginError">
+      <p>{{ loginError.message }}</p>
+    </div>
     <div class="form-button">
-      <button type="submit" class="button button-primary" (click)="login()">Log In</button>
+      <button type="submit" class="button submit-button" (click)="login()">Log In</button>
     </div>
   </form>
-</div>
-<div *ngIf="(loginError$ | async) as loginError">
-  <p>{{ loginError.message }}</p>
 </div>
 
 <div *ngIf="(loggedIn$ | async)">
