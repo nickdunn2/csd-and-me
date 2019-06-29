@@ -1,15 +1,20 @@
 <div class="login-form-wrapper">
   <form *ngIf="!(loggedIn$ | async)" class="login-form" [formGroup]="loginForm">
-    <h1>FloSports CSD</h1>
+    <h2>FloSports CSD</h2>
     <div class="form-field">
-      <!-- <label for="email-input">Email:</label> -->
-      <input id="email-input" name="email" formControlName="email" placeholder="Email">
+      <div class="icon-wrapper">
+        <span class="icon"><i class="fas fa-user"></i></span>
+      </div>
+      <input id="email-input" class="form-input" name="email" formControlName="email" placeholder="Email">
     </div>
     <div class="form-field">
-      <!-- <label for="password-input">Password:</label> -->
-      <input id="password-input" name="password" formControlName="password" type="password" placeholder="Password">
+      <div class="icon-wrapper">
+        <span class="icon"><i class="fas fa-lock"></i></span>
+      </div>
+      <input id="password-input" class="form-input" name="password" formControlName="password" type="password"
+        placeholder="Password">
     </div>
-    <div class="form-buttons">
+    <div class="form-button">
       <button type="submit" class="button button-primary" (click)="login()">Log In</button>
     </div>
   </form>

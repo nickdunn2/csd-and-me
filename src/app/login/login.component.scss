@@ -1,20 +1,59 @@
+
+// TODO: _variables.scss file and import
+$light-green: #7ed56f;
+$medium-green: #55c57a;
+$dark-green: #28b485;
+$primary-font-family: "Lato", sans-serif;
+$grey-text-color: #5c5c5c;
+
 .login-form-wrapper {
   display: grid;
   height: 100%;
   background: linear-gradient(
     to right bottom, 
-    #b4b4b4, 
-    #3b3b3b);
+    $light-green, 
+    $dark-green);
   align-items: center;
-  border: 1px solid purple;
 
   .login-form {
-    background: transparent;
-    height: 50%;
+    background: #ececec;
+    // height: 50%;
     width: 300px;
     justify-self: center;
     text-align: center;
     padding: 20px;
     border: 1px solid orange;
+
+    .form-field {
+      display: grid;
+      grid-template-columns: 50px auto;
+      width: 100%;
+      max-width: 320px;
+      border-radius: 4px;
+      background-color: #fff;
+      overflow: hidden;
+      margin-bottom: 10px;
+
+      .form-input {
+        border: none;
+        font-size: 18px;
+        font-family: $primary-font-family;
+        padding: 10px 15px;
+        color: $grey-text-color;
+        outline: none;
+        line-height: 1.5;
+        width: calc(100% - 50px);
+      }
+
+      .icon-wrapper {
+        display: grid;
+        align-items: center;
+        background-color: $grey-text-color;
+
+        span.icon {
+          color: #fff;
+        }
+      }
+    }
   }
 }
