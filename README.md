@@ -1,4 +1,13 @@
-# CSD Revamp Roadmap
+# CSD Revamp
+## Goals
+1. Contribute to the business.
+  * Make life easier for Customer Service.
+  * Improve retention.
+2. Become a more valuable, more complete developer by learning how to "own" a project.
+3. Have fun with it!
+4. More to come...
+
+## Roadmap
 ### Login Page
 - [x] Understand JWT with Angular (set "session" via localStorage upon successful login)
 - [x] `isLoggedIn$` stream in `AuthService`
@@ -32,10 +41,11 @@
 - [ ] The build process (`npm run start.staging`, for example. fusebox? Angular CLI?)
 - [ ] Error handling + logging (where to send the errors that occur, where to monitor)
 - [ ] How/where to deploy
+- [ ] Best practices on keeping projects up-to-date (e.g., Angular updates)
 - [ ] Move this project to Flo repo and allow others to contribute
 
 ### Future Improvement Ideas
-- [ ] Some type of user "churn predictor score" on the profile page, based on recent metrics 
+- [ ] Some type of user "churn predictor score" on the profile page, based on recent metrics (Note: Data Team has a Q3 goal to come up with a "User Health Model" that sounds like it could be highly related to this)
 
 
 # CsdAndMe
