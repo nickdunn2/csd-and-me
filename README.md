@@ -27,6 +27,7 @@
 - [ ] Unit tests
 
 ### Miscellaneous
+- [ ] Organization of SCSS (e.g., variables file, global classes, mixins, etc)
 - [ ] Environment variables (e.g., different API base urls based on local/staging/prod)
 - [ ] The build process (`npm run start.staging`, for example. fusebox? Angular CLI?)
 - [ ] Error handling + logging (where to send the errors that occur, where to monitor)
