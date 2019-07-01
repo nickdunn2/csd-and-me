@@ -8,7 +8,7 @@ import * as moment from 'moment'
   providedIn: 'root'
 })
 export class AuthService {
-  private STAGING_BASE_URL = 'https://staging-api.flosports.tv'
+  private STAGING_BASE_URL = 'https://staging-api.flosports.tv' // TODO: need env variables somehow
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken)
   public isLoggedIn$ = this.isLoggedInSubject.asObservable()
 
@@ -19,7 +19,7 @@ export class AuthService {
       .pipe(
         catchError(handleLoginError),
         map(mapITokenResponseToIToken),
-        tap(this.setSession),
+        tap(setSession),
         shareReplay(1)
       )
   }
@@ -43,11 +43,6 @@ export class AuthService {
 
   private get jwtExpiration() {
     return moment(JSON.parse(localStorage.getItem('expires_at')))
-  }
-
-  private setSession(token: IToken): void {
-    localStorage.setItem('id_token', token.id_token)
-    localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
   }
 }
 
@@ -89,6 +84,14 @@ export function handleLoginError(errorResponse: HttpErrorResponse) {
       : buildLoginErrorMessage(errorResponse.status, errorResponse.error.message)
 
   return throwError(msg)
+}
+
+/**
+ * Set localStorage based on token values received from a successful login attempt.
+ */
+export function setSession(token: IToken): void {
+  localStorage.setItem('id_token', token.id_token)
+  localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
 }
 
 export function buildLoginErrorMessage(status: number, message: string): ILoginError {
