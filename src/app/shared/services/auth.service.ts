@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { shareReplay, tap, map, catchError } from 'rxjs/operators'
-import { throwError, BehaviorSubject } from 'rxjs'
+import { throwError, BehaviorSubject, Observable } from 'rxjs'
 import * as moment from 'moment'
 
 @Injectable({
@@ -78,7 +78,7 @@ export function mapITokenResponseToIToken(tokenResponse: ITokenResponse): IToken
 }
 
 /* Slightly modified from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
-export function handleLoginError(errorResponse: HttpErrorResponse) {
+export function handleLoginError(errorResponse: HttpErrorResponse): Observable<never> {
   const msg = !errorResponse.error ? 'Whoops! An unknown error occurred.'
     : errorResponse.error instanceof ErrorEvent ? buildLoginErrorMessage(errorResponse.status, `Whoops! A network error occurred: ${errorResponse.error.message}. Please try again.`)
       : buildLoginErrorMessage(errorResponse.status, errorResponse.error.message)
