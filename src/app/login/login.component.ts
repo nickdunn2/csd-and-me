@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { take } from 'rxjs/operators'
 import { AuthService, ILoginError } from '../shared/services/auth.service'
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -10,14 +11,15 @@ import { Subject } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  public loginForm: FormGroup;
+  public loginForm: FormGroup
   public loggedIn$ = this.auth.isLoggedIn$
   public loginErrorSubject = new Subject<ILoginError | undefined>()
   public loginError$ = this.loginErrorSubject.asObservable()
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -34,6 +36,7 @@ export class LoginComponent {
         .subscribe(res => {
           console.log('login res', res)
           this.auth.updateLoggedIn(true)
+          this.router.navigate(['users'])
         },
           error => {
             console.error('login error', error)
