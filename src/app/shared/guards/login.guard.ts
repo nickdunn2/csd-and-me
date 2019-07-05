@@ -2,7 +2,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTr
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { AuthService } from '../services/auth.service'
-import { map } from 'rxjs/operators'
+import { map, take } from 'rxjs/operators'
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -11,6 +11,7 @@ export class LoginGuard implements CanActivate {
   canActivate(ars: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
     return this.auth.isLoggedIn$
       .pipe(
+        take(1),
         map(isLoggedIn => {
           if (!isLoggedIn) {
             return true
