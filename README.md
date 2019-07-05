@@ -15,8 +15,8 @@
 - [ ] LoginForm styling
 - [ ] LoginForm error handling
 - [ ] Disallow users without `ADMIN` status from logging in?
-- [ ] Correctly route to `/users` after successful login
-- [ ] LoginGuard (direct to `/users` if user is already logged in)
+- [x] Correctly route to `/users` after successful login
+- [x] LoginGuard (direct to `/users` if user is already logged in)
 - [ ] Unit tests
 
 ### User Search Form
