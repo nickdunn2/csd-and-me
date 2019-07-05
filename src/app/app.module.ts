@@ -14,7 +14,9 @@ import { UsersGuard } from './shared/guards/users.guard'
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [UsersGuard] } // TODO: users/{id} route/component and ** for NotFoundComponent
+  { path: 'users', component: UsersComponent, canActivate: [UsersGuard] },
+  // TODO { path: 'users/:id', component: UserDetailComponent, canActivate: [UsersGuard] },
+  // TODO { path: '**', component: NotFoundComponent}
 ]
 
 @NgModule({
