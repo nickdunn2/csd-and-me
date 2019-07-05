@@ -6,13 +6,14 @@ import { RouterModule, Routes } from '@angular/router'
 
 import { AppComponent } from './app.component'
 import { LoginComponent } from './login/login.component'
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/shared.module'
 import { UsersComponent } from './users/users.component'
+import { LoginGuard } from './shared/guards/login.guard'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'users', component: UsersComponent }
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'users', component: UsersComponent } // TODO: users/{id} route/component and ** for NotFoundComponent
 ]
 
 @NgModule({
