@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service'
 import { AuthInterceptor } from './interceptors/auth.interceptor'
 import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { LoginGuard } from './guards/login.guard'
+import { UsersGuard } from './guards/users.guard'
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,8 @@ import { LoginGuard } from './guards/login.guard'
       multi: true
     },
     AuthService,
-    LoginGuard
+    LoginGuard,
+    UsersGuard
   ]
 })
 export class SharedModule { }

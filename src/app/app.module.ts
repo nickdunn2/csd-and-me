@@ -9,11 +9,12 @@ import { LoginComponent } from './login/login.component'
 import { SharedModule } from './shared/shared.module'
 import { UsersComponent } from './users/users.component'
 import { LoginGuard } from './shared/guards/login.guard'
+import { UsersGuard } from './shared/guards/users.guard'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'users', component: UsersComponent } // TODO: users/{id} route/component and ** for NotFoundComponent
+  { path: 'users', component: UsersComponent, canActivate: [UsersGuard] } // TODO: users/{id} route/component and ** for NotFoundComponent
 ]
 
 @NgModule({
