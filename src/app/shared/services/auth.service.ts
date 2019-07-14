@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { shareReplay, tap, map, catchError } from 'rxjs/operators'
 import { throwError, BehaviorSubject, Observable } from 'rxjs'
 import * as moment from 'moment'
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,14 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken)
   public isLoggedIn$ = this.isLoggedInSubject.asObservable()
 
-  constructor(private http: HttpClient) { }
+  // TODO: Need some type of getUserFromToken() method for logged-in users
+  private userSubject = new BehaviorSubject<IUser | undefined>(undefined)
+  public user$ = this.userSubject.asObservable()
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   public login(credentials: ILoginCredentials) {
     return this.http.post<ITokenResponse>(`${this.STAGING_BASE_URL}/api/tokens`, credentials)
@@ -20,6 +28,8 @@ export class AuthService {
         catchError(handleLoginError),
         // TODO: Add a step in here that checks for Admin? Also could set some type of user$ stream in here as well.
         map(mapITokenResponseToIToken),
+        tap(token => ensureRoleAdmin(token)),
+        tap(token => this.updateUser(token.user)),
         tap(setSession),
         shareReplay(1)
       )
@@ -29,10 +39,15 @@ export class AuthService {
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
     this.updateLoggedIn(false)
+    this.router.navigate(['login'])
   }
 
   public updateLoggedIn(loggedIn: boolean) {
     this.isLoggedInSubject.next(loggedIn)
+  }
+
+  public updateUser(user: IUser | undefined) {
+    this.userSubject.next(user)
   }
 
   /**
@@ -52,6 +67,34 @@ export interface ILoginCredentials {
   password: string
 }
 
+export interface IUser {
+  birthday?: string
+  country?: string
+  created_at?: string
+  email?: string
+  enabled?: boolean
+  facebook_id?: string
+  first_name?: string
+  gender?: string
+  id: number
+  last_name?: string
+  mile_split_user_id?: number
+  modified_at?: string
+  new_facebook_user?: boolean
+  phone?: string
+  profile_picture_url_large?: string
+  profile_picture_url_medium?: string
+  profile_picture_url_small?: string
+  roles?: ReadonlyArray<string>
+  site_id?: number
+  site_ids?: ReadonlyArray<number>
+  spammer?: boolean
+  universal?: boolean
+  user_subscriptions?: ReadonlyArray<any> // TODO: UserSubscription interface
+  username?: string
+  zip?: string
+}
+
 export interface ITokenResponse {
   user: any // TODO if needed
   user_id: number
@@ -64,6 +107,7 @@ export interface ITokenResponse {
 export interface IToken {
   id_token: string
   expires_at: number // TODO: timestamp type?
+  user: IUser
 }
 
 export interface ILoginError {
@@ -74,7 +118,8 @@ export interface ILoginError {
 export function mapITokenResponseToIToken(tokenResponse: ITokenResponse): IToken {
   return {
     id_token: tokenResponse.token,
-    expires_at: tokenResponse.exp
+    expires_at: tokenResponse.exp,
+    user: tokenResponse.user
   }
 }
 
@@ -87,12 +132,28 @@ export function handleLoginError(errorResponse: HttpErrorResponse): Observable<n
   return throwError(msg)
 }
 
+export function ensureRoleAdmin(token: IToken) {
+  const user = token.user
+  const acceptedRoles = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
+  const found = acceptedRoles.some(role => user && user.roles.includes(role))
+
+  if (!found || !user) {
+    // TODO: What is the difference between this and...
+    // return throwError('This account does not have admin access.')?
+    // throwError did not work for some reason
+    throw new Error('This account does not have admin access.')
+  }
+
+  return token
+}
+
 /**
  * Set localStorage based on token values received from a successful login attempt.
  */
 export function setSession(token: IToken): void {
   localStorage.setItem('id_token', token.id_token)
   localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
+  // localStorage.setItem('user', token.user)
 }
 
 export function buildLoginErrorMessage(status: number, message: string): ILoginError {

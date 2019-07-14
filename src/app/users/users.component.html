@@ -1,3 +1,6 @@
-<p>
-  users works!
+<p *ngIf="user$ | async as user">
+  users works! current user: {{ user.email }}
 </p>
+<div>
+  <button (click)="logout()">Log out</button>
+</div>
