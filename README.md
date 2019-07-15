@@ -12,7 +12,7 @@
 - [x] Understand JWT with Angular (set "session" via localStorage upon successful login)
 - [x] `isLoggedIn$` stream in `AuthService`
 - [x] set a `user$` stream upon successful login
-- [ ] add some type of `getUserFromToken()` method for refreshes when logged in
+- [x] add some type of `getUserFromToken()` method for refreshes when logged in
 - [ ] LoginForm styling
 - [ ] LoginForm error handling
 - [x] Disallow users without `ADMIN` status from logging in?
