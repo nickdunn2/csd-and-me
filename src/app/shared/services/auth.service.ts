@@ -13,8 +13,7 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken)
   public isLoggedIn$ = this.isLoggedInSubject.asObservable()
 
-  // TODO: Need some type of getUserFromToken() method for logged-in users
-  private userSubject = new BehaviorSubject<IUser | undefined>(undefined)
+  private userSubject = new BehaviorSubject<IUser | undefined>(this.getUserFromToken())
   public user$ = this.userSubject.asObservable()
 
   constructor(
@@ -38,6 +37,7 @@ export class AuthService {
   public logout() {
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
+    localStorage.removeItem('user')
     this.updateLoggedIn(false)
     this.router.navigate(['login'])
   }
@@ -59,6 +59,10 @@ export class AuthService {
 
   private get jwtExpiration() {
     return moment(JSON.parse(localStorage.getItem('expires_at')))
+  }
+
+  private getUserFromToken() {
+    return JSON.parse(localStorage.getItem('user'))
   }
 }
 
@@ -153,7 +157,7 @@ export function ensureRoleAdmin(token: IToken) {
 export function setSession(token: IToken): void {
   localStorage.setItem('id_token', token.id_token)
   localStorage.setItem('expires_at', JSON.stringify(moment.unix(token.expires_at)))
-  // localStorage.setItem('user', token.user)
+  localStorage.setItem('user', JSON.stringify(token.user))
 }
 
 export function buildLoginErrorMessage(status: number, message: string): ILoginError {
