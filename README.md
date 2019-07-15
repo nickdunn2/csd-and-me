@@ -48,6 +48,7 @@
 
 ### Future Improvement Ideas
 - [ ] Some type of user "churn predictor score" on the profile page, based on recent metrics (Note: Data Team has a Q3 goal to come up with a "User Health Model" that sounds like it could be highly related to this)
+- [ ] Show "possible matches" (possible typos, etc) when searching for an email that doesn't exist in our system
 
 
 # CsdAndMe
