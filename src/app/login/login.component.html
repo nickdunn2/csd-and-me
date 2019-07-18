@@ -18,12 +18,7 @@
       <p class="error-msg">{{ loginError.message }}</p>
     </div>
     <div class="form-button">
-      <button type="submit" class="button submit-button" (click)="login()">Log In</button>
+      <button type="submit" class="button submit-button" (click)="login()" [disabled]="!canSubmitForm">Log In</button>
     </div>
   </form>
-</div>
-
-<div *ngIf="(loggedIn$ | async)">
-  you're logged in yippee
-  <button class="button button-primary" (click)="logout()">Log Out</button>
 </div>

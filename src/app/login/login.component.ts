@@ -45,7 +45,10 @@ export class LoginComponent {
     }
   }
 
-  public logout() {
-    this.auth.logout()
+  public get canSubmitForm() {
+    return (
+      this.loginForm.valid &&
+      !this.loginForm.pending // TODO: Add && !this.loginFormSubmitting
+    )
   }
 }

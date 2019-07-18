@@ -4,7 +4,8 @@ $light-green: #7ed56f;
 $medium-green: #55c57a;
 $dark-green: #28b485;
 $primary-font-family: "Lato", sans-serif;
-$light-grey: #f0f0f0;
+$lightest-grey: #f0f0f0;
+$light-grey: #d3d3d3;
 $grey-text-color: #5c5c5c;
 
 .login-form-wrapper {
@@ -17,7 +18,7 @@ $grey-text-color: #5c5c5c;
   align-items: center;
 
   .login-form {
-    background: $light-grey;
+    background: $lightest-grey;
     width: 300px;
     justify-self: center;
     text-align: center;
@@ -75,6 +76,15 @@ $grey-text-color: #5c5c5c;
       &:hover {
         transform: translateY(-2px);
         transition: transform 0.2s ease 0s;
+      }
+
+      &:disabled {
+        background-color: $light-grey;
+        cursor: not-allowed;
+
+        &:hover {
+          transform: none;
+        }
       }
     }
   }
