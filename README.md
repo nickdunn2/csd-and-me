@@ -39,6 +39,7 @@
 ### Miscellaneous
 - [ ] Organization of SCSS (e.g., variables file, global classes, mixins, etc)
 - [ ] Environment variables (e.g., different API base urls based on local/staging/prod)
+- [ ] e2e testing with Cypress (Matt E's FE Guild presentation on 7/18/19)
 - [ ] The build process (`npm run start.staging`, for example. fusebox? Angular CLI?)
 - [ ] Error handling + logging (where to send the errors that occur, where to monitor)
 - [ ] How/where to deploy
