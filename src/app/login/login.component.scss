@@ -77,8 +77,9 @@ $grey-text-color: #5c5c5c;
         outline: none;
   
         &:hover {
-          transform: translateY(-2px);
-          transition: transform 0.2s ease 0s;
+          // TODO: taking this away until hover can be synced with the fa-spinner
+          // transform: translateY(-2px);
+          // transition: transform 0.2s ease 0s;
         }
   
         &:disabled {

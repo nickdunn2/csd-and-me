@@ -15,6 +15,7 @@ export class LoginComponent {
   public loggedIn$ = this.auth.isLoggedIn$
   public loginErrorSubject = new Subject<ILoginError | undefined>()
   public loginError$ = this.loginErrorSubject.asObservable()
+  public formSubmitting = false // TODO: Should this be a subject/observable like everything else?
 
   constructor(
     private fb: FormBuilder,
@@ -31,15 +32,19 @@ export class LoginComponent {
     const creds = this.loginForm.value
 
     if (creds.email && creds.password) {
+      this.formSubmitting = true
+
       this.auth.login(creds)
         .pipe(take(1))
         .subscribe(res => {
           console.log('login res', res)
+          this.formSubmitting = false
           this.auth.updateLoggedIn(true)
           this.router.navigate(['users'])
         },
           error => {
             console.error('login error', error)
+            this.formSubmitting = false
             this.loginErrorSubject.next(error)
           })
     }
@@ -48,7 +53,8 @@ export class LoginComponent {
   public get canSubmitForm() {
     return (
       this.loginForm.valid &&
-      !this.loginForm.pending // TODO: Add && !this.loginFormSubmitting
+      !this.loginForm.pending &&
+      !this.formSubmitting
     )
   }
 }

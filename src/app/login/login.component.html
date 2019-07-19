@@ -19,7 +19,7 @@
     </div>
     <div class="form-button">
       <button type="submit" class="button submit-button" (click)="login()" [disabled]="!canSubmitForm">Log In<i
-          class="fa fa-spinner fa-spin fa-fw" *ngIf="true"></i></button>
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button>
     </div>
   </form>
 </div>
