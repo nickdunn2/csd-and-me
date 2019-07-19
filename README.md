@@ -14,7 +14,7 @@
 - [x] set a `user$` stream upon successful login
 - [x] add some type of `getUserFromToken()` method for refreshes when logged in
 - [ ] LoginForm styling
-- [ ] LoginForm error handling
+- [x] LoginForm error handling
 - [x] Disallow users without `ADMIN` status from logging in?
 - [x] Correctly route to `/users` after successful login
 - [x] LoginGuard (direct to `/users` if user is already logged in)
