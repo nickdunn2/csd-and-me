@@ -46,6 +46,7 @@
 - [ ] Best practices on keeping projects up-to-date (e.g., Angular updates)
 - [ ] Move this project to Flo repo and allow others to contribute
 - [ ] From "Build New Services" presentation on project health (Logging, Monitoring, Alerting, CI, Time to Deploy, Automated Tests, Unit Tests)
+- [ ] Look at "dockerizing"
 
 ### Future Improvement Ideas
 - [ ] Some type of user "churn predictor score" on the profile page, based on recent metrics (Note: Data Team has a Q3 goal to come up with a "User Health Model" that sounds like it could be highly related to this)
