@@ -1,14 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './login.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+fdescribe(LoginComponent.name, () => {
+  let component: LoginComponent
+  let fixture: ComponentFixture<LoginComponent>
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate'])
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent]
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [LoginComponent],
+      providers: [
+        { provide: AuthService, useValue: new MockAuthService() },
+        { provide: Router, useValue: routerSpy }
+      ]
     })
       .compileComponents();
   }));
@@ -23,3 +34,8 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+// TODO: Move this to its own file (in a /test or /mocks directory)
+export class MockAuthService {
+
+}
