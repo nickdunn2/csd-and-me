@@ -1,12 +1,35 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { RouterTestingModule } from '@angular/router/testing'
 
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service'
 
-describe('AuthService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+fdescribe(AuthService.name, () => {
+  let service: AuthService
+  let httpMock: HttpTestingController
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([])
+      ],
+      providers: [AuthService]
+    })
+
+    httpMock = TestBed.get(HttpTestingController)
+    service = TestBed.get(AuthService)
+  })
+
+  afterEach(() => {
+    httpMock.verify()
+  })
 
   it('should be created', () => {
-    const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
-  });
-});
+  })
+
+  it('should return POST blah blah ', () => {
+
+  })
+})

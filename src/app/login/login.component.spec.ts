@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
 
-fdescribe(LoginComponent.name, () => {
+describe(LoginComponent.name, () => {
   let component: LoginComponent
   let fixture: ComponentFixture<LoginComponent>
   const routerSpy = jasmine.createSpyObj('Router', ['navigate'])
