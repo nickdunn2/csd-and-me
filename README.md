@@ -20,6 +20,7 @@
 
 ### Break for Unit Tests
 - [ ] `AuthService`
+- [ ] Get CircleCI and codecov up and running
 - [ ] `LoginComponent`
 - [ ] `LoginGuard`
 - [ ] `UsersGuard`
