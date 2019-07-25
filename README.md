@@ -13,12 +13,16 @@
 - [x] `isLoggedIn$` stream in `AuthService`
 - [x] set a `user$` stream upon successful login
 - [x] add some type of `getUserFromToken()` method for refreshes when logged in
-- [ ] LoginForm styling
 - [x] LoginForm error handling
 - [x] Disallow users without `ADMIN` status from logging in?
 - [x] Correctly route to `/users` after successful login
 - [x] LoginGuard (direct to `/users` if user is already logged in)
-- [ ] Unit tests
+
+### Break for Unit Tests
+- [ ] `AuthService`
+- [ ] `LoginComponent`
+- [ ] `LoginGuard`
+- [ ] `UsersGuard`
 
 ### User Search Form
 - [ ] Build out user search form functionality
@@ -36,7 +40,7 @@
 - [ ] Guard (go to `login` if unauthorized)
 - [ ] Unit tests
 
-### Miscellaneous
+### Miscellaneous (Project "Ownership")
 - [ ] Organization of SCSS (e.g., variables file, global classes, mixins, etc)
 - [ ] Environment variables (e.g., different API base urls based on local/staging/prod)
 - [ ] e2e testing with Cypress (Matt E's FE Guild presentation on 7/18/19)
@@ -49,6 +53,7 @@
 - [ ] Look at "dockerizing"
 
 ### Future Improvement Ideas
+- [ ] Finish off any LoginForm styling improvements
 - [ ] Some type of user "churn predictor score" on the profile page, based on recent metrics (Note: Data Team has a Q3 goal to come up with a "User Health Model" that sounds like it could be highly related to this)
 - [ ] Show "possible matches" (possible typos, etc) when searching for an email that doesn't exist in our system
 
