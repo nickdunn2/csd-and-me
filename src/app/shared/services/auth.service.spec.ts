@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 import { AuthService, ILoginCredentials, IUser } from './auth.service'
 
-fdescribe(AuthService.name, () => {
+describe(AuthService.name, () => {
   // let service: AuthService
   // let httpMock: HttpTestingController
 

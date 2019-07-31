@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
 
-describe(LoginComponent.name, () => {
+fdescribe(LoginComponent.name, () => {
   let component: LoginComponent
   let fixture: ComponentFixture<LoginComponent>
   const routerSpy = jasmine.createSpyObj('Router', ['navigate'])
@@ -21,18 +21,29 @@ describe(LoginComponent.name, () => {
         { provide: Router, useValue: routerSpy }
       ]
     })
-      .compileComponents();
+      .compileComponents()
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LoginComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    expect(component).toBeTruthy()
+  })
+
+  it('should have a login form (invalid by default) with blank values after instantiation', () => {
+    const form = component.loginForm
+    const email = form.get('email')
+    const password = form.get('password')
+
+    expect(form).toBeTruthy()
+    expect(email.value).toBe('')
+    expect(password.value).toBe('')
+    expect(form.valid).toBeFalsy()
+  })
 });
 
 // TODO: Move this to its own file (in a /test or /mocks directory)
