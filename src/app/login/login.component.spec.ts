@@ -44,7 +44,18 @@ fdescribe(LoginComponent.name, () => {
     expect(password.value).toBe('')
     expect(form.valid).toBeFalsy()
   })
-});
+
+  it('should be a valid form when email and password are filled in', () => {
+    const form = component.loginForm
+    const email = form.get('email')
+    const password = form.get('password')
+
+    email.setValue('good@gmail.com')
+    password.setValue('goodpassword')
+
+    expect(form.valid).toBeTruthy()
+  })
+})
 
 // TODO: Move this to its own file (in a /test or /mocks directory)
 export class MockAuthService {
