@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { LoginComponent } from './login.component'
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms'
+import { AuthService } from '../shared/services/auth.service'
+import { Router } from '@angular/router'
+import { MockAuthService, validCredentials } from 'src/testing/mock-auth.service'
 
 fdescribe(LoginComponent.name, () => {
   let component: LoginComponent
@@ -36,28 +37,30 @@ fdescribe(LoginComponent.name, () => {
 
   it('should have a login form (invalid by default) with blank values after instantiation', () => {
     const form = component.loginForm
-    const email = form.get('email')
-    const password = form.get('password')
 
     expect(form).toBeTruthy()
-    expect(email.value).toBe('')
-    expect(password.value).toBe('')
+    expect(form.get('email').value).toBe('')
+    expect(form.get('password').value).toBe('')
     expect(form.valid).toBeFalsy()
+    expect(component.canSubmitForm).toBeFalsy()
   })
 
   it('should be a valid form when email and password are filled in', () => {
-    const form = component.loginForm
-    const email = form.get('email')
-    const password = form.get('password')
+    component.loginForm.setValue(validCredentials)
 
-    email.setValue('good@gmail.com')
-    password.setValue('goodpassword')
+    expect(component.loginForm.valid).toBeTruthy()
+    expect(component.canSubmitForm).toBeTruthy()
+  })
 
-    expect(form.valid).toBeTruthy()
+  it('should call appropriate AuthService methods when valid form is submitted', () => {
+    const authLoginSpy = spyOn(TestBed.get(AuthService), 'login').and.callThrough()
+    const authUpdateLoggedInSpy = spyOn(TestBed.get(AuthService), 'updateLoggedIn')
+
+    component.loginForm.setValue(validCredentials)
+
+    component.login()
+
+    expect(authLoginSpy).toHaveBeenCalledWith(validCredentials)
+    expect(authUpdateLoggedInSpy).toHaveBeenCalledWith(true)
   })
 })
-
-// TODO: Move this to its own file (in a /test or /mocks directory)
-export class MockAuthService {
-
-}

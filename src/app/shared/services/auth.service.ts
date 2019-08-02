@@ -25,7 +25,6 @@ export class AuthService {
     return this.http.post<ITokenResponse>(`${this.STAGING_BASE_URL}/api/tokens`, credentials)
       .pipe(
         catchError(handleLoginError),
-        // TODO: Add a step in here that checks for Admin? Also could set some type of user$ stream in here as well.
         map(mapITokenResponseToIToken),
         tap(token => ensureRoleAdmin(token)),
         tap(token => this.updateUser(token.user)),
