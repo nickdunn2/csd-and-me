@@ -1,0 +1,24 @@
+<div class="user-search-form-wrapper">
+  <form *ngIf="!(loggedIn$ | async)" class="user-search-form" [formGroup]="userSearchForm">
+    <div class="form-field">
+      <!-- <div class="icon-wrapper">
+        <span class="icon"><i class="fas fa-user"></i></span>
+      </div> -->
+      <input id="email-input" class="form-input" name="email" formControlName="email" placeholder="Email">
+    </div>
+    <!-- <div class="form-field">
+      <div class="icon-wrapper">
+        <span class="icon"><i class="fas fa-lock"></i></span>
+      </div>
+      <input id="password-input" class="form-input" name="password" formControlName="password" type="password"
+        placeholder="Password">
+    </div>
+    <div *ngIf="(loginError$ | async) as loginError">
+      <p class="error-msg">{{ loginError.message }}</p>
+    </div>
+    <div class="form-button">
+      <button type="submit" class="button submit-button" (click)="login()" [disabled]="!canSubmitForm">Log In<i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button>
+    </div> -->
+  </form>
+</div>

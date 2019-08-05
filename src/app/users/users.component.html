@@ -1,6 +1,7 @@
 <p *ngIf="user$ | async as user">
   users works! current user: {{ user.email }}
 </p>
+<csd-user-search-form></csd-user-search-form>
 <div>
   <button (click)="logout()">Log out</button>
 </div>
