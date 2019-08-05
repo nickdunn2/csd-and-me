@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-login',
+  selector: 'csd-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

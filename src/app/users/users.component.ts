@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { AuthService } from '../shared/services/auth.service'
 
 @Component({
-  selector: 'app-users',
+  selector: 'csd-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
