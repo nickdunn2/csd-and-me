@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module'
 import { UsersComponent } from './users/users.component'
 import { LoginGuard } from './shared/guards/login.guard'
 import { UsersGuard } from './shared/guards/users.guard'
+import { UserSearchFormComponent } from './users/user-search-form/user-search-form.component'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
+    UserSearchFormComponent
   ],
   imports: [
     RouterModule.forRoot(
