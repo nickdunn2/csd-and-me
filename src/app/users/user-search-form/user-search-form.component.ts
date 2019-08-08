@@ -13,19 +13,13 @@ export class UserSearchFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.userSearchForm = this.fb.group({
-      email: []
+      email: [],
+      username: [],
+      creditCard: [],
+      phoneNumber: [],
+      firstName: [],
+      lastName: [],
+      stripeCustomerId: []
     })
   }
-
-  // ngOnInit() {
-  //   this.form = this.fb.group({
-  //     last_4_cc: ['', CreditCardValidator.validateLast4],
-  //     email: [],
-  //     username: [],
-  //     phone_number: [],
-  //     first_name: [],
-  //     last_name: [],
-  //     customer_id: []
-  //   });
-  // }
 }
