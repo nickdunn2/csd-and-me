@@ -9,7 +9,6 @@ import { Router } from '@angular/router'
   providedIn: 'root'
 })
 export class AuthService {
-  private STAGING_BASE_URL = 'https://staging-api.flosports.tv' // TODO: need env variables somehow
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken)
   public isLoggedIn$ = this.isLoggedInSubject.asObservable()
 
@@ -22,7 +21,7 @@ export class AuthService {
   ) { }
 
   public login(credentials: ILoginCredentials) {
-    return this.http.post<ITokenResponse>(`${this.STAGING_BASE_URL}/api/tokens`, credentials)
+    return this.http.post<ITokenResponse>(`${STAGING_BASE_URL}/api/tokens`, credentials)
       .pipe(
         catchError(handleLoginError),
         map(mapITokenResponseToIToken),
@@ -62,6 +61,9 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user'))
   }
 }
+
+// TODO: need env variables somehow
+export const STAGING_BASE_URL = 'https://staging-api.flosports.tv'
 
 export interface ILoginCredentials {
   email: string
