@@ -31,98 +31,10 @@
       <input type="text" id="stripe-customer-id" class="form-input" name="stripe-customer-id"
         formControlName="stripeCustomerId" placeholder="Stripe Customer Id (must be exact)">
     </div>
+    <div class="form-button">
+      <button type="submit" class="button submit-button" (click)="search()">Search</button>
+      <!-- <button type="submit" class="button submit-button" (click)="search()" [disabled]="!canSubmitForm">Search<i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button> -->
+    </div>
   </form>
 </div>
-
-<!-- <form [ngFormModel]="form">
-  <div class="row">
-      <div class="form-group col-md-4">
-          <label class="control-label" for="email">Email address (Exact match if only field entered.)</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="email" 
-              placeholder="Email"
-  
-              ngControl="email"
-                  />
-      </div>
-      <div class="form-group col-md-4">
-          <label class="control-label" for="username">User Name</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="username" 
-              placeholder="User Name"
-  
-              ngControl="username"
-                  />
-      </div>
-      <div class="form-group col-md-4">
-          <label class="control-label" for="phone">Phone Number</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="phone" 
-              placeholder="Phone Number"
-  
-              ngControl="phone_number"
-                  />
-      </div>
-  </div>
-  <div class="row">
-      <div class="form-group col-md-6">
-          <label class="control-label" for="firstName">First Name</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="firstName" 
-              placeholder="First Name"
-              
-              ngControl="first_name"
-                  />
-      </div>
-      <div class="form-group col-md-6">
-          <label class="control-label" for="lastName">Last Name</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="lastName" 
-              placeholder="Last Name"
-  
-              ngControl="last_name"
-                  />
-      </div>
-  </div>
-  <div class="row">
-      <div class="form-group col-md-6">
-          <label class="control-label" for="stripeId">Stripe Id</label>
-          <input 
-              type="text" 
-              class="form-control" 
-              id="stripeId" 
-              placeholder="Customer Id In Stripe, exact match"
-              ngControl="customer_id"
-                  />
-  
-      </div>
-      <div class="form-group col-md-6" [class.has-error]="last4cc.errors && last4cc.touched" >
-          <label class="control-label" for="Last4cc">Last 4 CC</label>
-          <input 
-              type="text"
-              class="form-control" 
-              id="Last4cc" 
-              placeholder="Last 4 digits of the credit card"
-  
-              ngControl="last_4_cc"
-              #last4cc="ngForm"    
-                  />
-             <span *ngIf="last4cc.errors && last4cc.touched" class="help-block">You must enter a 4 digit number.</span>  
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-md-12">
-          <button [disabled]="!form.valid" class="btn btn-primary pull-right" (click)="search()">Search</button>
-      </div>
-  </div>
-  </form> -->
