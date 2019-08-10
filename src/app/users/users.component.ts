@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
-import { AuthService } from '../shared/services/auth.service'
+import { AuthService, IUser } from '../shared/services/auth.service'
 import { UserService, IUserSearch } from '../shared/services/user.service'
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'csd-users',
@@ -18,7 +19,20 @@ export class UsersComponent {
     this.auth.logout()
   }
 
-  public search(searchData: IUserSearch) {
-    this.userService.search(searchData)
+  public searchByEmail(email: string) {
+    this.userService.searchByEmail(email)
+      .pipe(take(1))
+      .subscribe((user: IUser) => {
+        console.log('user --', user)
+      })
   }
+
+  // public search(searchData: IUserSearch) {
+  //   this.userService.search(searchData)
+  //     .pipe(
+  //       take(1)
+  //     ).subscribe((user: IUser) => {
+  //       console.log('user --', user)
+  //     })
+  // }
 }

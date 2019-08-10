@@ -10,7 +10,8 @@ import { IUserSearch } from 'src/app/shared/services/user.service'
 export class UserSearchFormComponent {
   public userSearchForm: FormGroup
 
-  @Output() readonly searchSubmitted = new EventEmitter<IUserSearch>()
+  @Output() readonly genericSearchSubmitted = new EventEmitter<IUserSearch>()
+  @Output() readonly emailSearchSubmitted = new EventEmitter<string>()
 
   constructor(private fb: FormBuilder) {
     this.userSearchForm = this.fb.group({
@@ -25,6 +26,22 @@ export class UserSearchFormComponent {
   }
 
   search() {
-    this.searchSubmitted.emit(this.userSearchForm.value)
+    if (!this.userSearchForm.value) return
+
+    if (isEmailOnly(this.userSearchForm.value)) {
+      this.emailSearchSubmitted.next(this.userSearchForm.get('email').value)
+    } else {
+      this.genericSearchSubmitted.emit(this.userSearchForm.value)
+    }
   }
+}
+
+export const isEmailOnly = (data: IUserSearch) => {
+  return !!data.email &&
+    !data.username &&
+    !data.creditCard &&
+    !data.phoneNumber &&
+    !data.firstName &&
+    !data.lastName &&
+    !data.stripeCustomerId
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { STAGING_BASE_URL } from './auth.service'
-import { take } from 'rxjs/operators'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { STAGING_BASE_URL, IUser } from './auth.service'
+import { map, catchError, shareReplay } from 'rxjs/operators'
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,30 +11,32 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  search(searchData: IUserSearch) {
-    if (isEmailOnly(searchData)) {
-      console.log('email only')
-      // return email API call here
-      return this.http.get(`${STAGING_BASE_URL}/api/users/email/${searchData.email}`)
-        .pipe(take(1))
-        .subscribe(res => console.log('res --', res))
-      // return this.http
-      //   .get(url + 'api/users/email/' + userSearch.email, requestOptions)
-      //   .map(r => r.json().data)
-      //   .map(user => {
-      //     const userRow = this.transformUserToUserRow(user);
-      //     const userTable = new UserTable(userRow ? [userRow] : [], userRow.name !== null, userRow.card_expiration_date !== null);
+  searchByEmail(email: string): Observable<IUser> {
+    return this.http.get<IFloApiResponse>(`${STAGING_BASE_URL}/api/users/email/${email}`)
+      .pipe(
+        catchError(handleSearchError),
+        map(res => res.data),
+        shareReplay(1)
+      )
+    // return this.http
+    //   .get(url + 'api/users/email/' + userSearch.email, requestOptions)
+    //   .map(r => r.json().data)
+    //   .map(user => {
+    //     const userRow = this.transformUserToUserRow(user);
+    //     const userTable = new UserTable(userRow ? [userRow] : [], userRow.name !== null, userRow.card_expiration_date !== null);
 
-      //     return new Pagination<UserTable>(
-      //       0,
-      //       0,
-      //       userTable
-      //     );
-      //   })
-    }
+    //     return new Pagination<UserTable>(
+    //       0,
+    //       0,
+    //       userTable
+    //     );
+    //   })
+    // }
 
     // return multi-faceted API call here
   }
+
+
 }
 
 export interface IUserSearch {
@@ -46,12 +49,29 @@ export interface IUserSearch {
   stripeCustomerId?: string
 }
 
-export const isEmailOnly = (data: IUserSearch) => {
-  return !!data.email &&
-    !data.username &&
-    !data.creditCard &&
-    !data.phoneNumber &&
-    !data.firstName &&
-    !data.lastName &&
-    !data.stripeCustomerId
+/* Slightly modified from Angular docs on error handling -- https://angular.io/guide/http#!#fetch-data-with-_http-get-_ */
+/* TODO: Look into combining this with AuthService's handleLoginError for more generic error handling */
+export const handleSearchError = (errorResponse: HttpErrorResponse): Observable<never> => {
+  const msg = !errorResponse.error ? 'Whoops! An unknown error occurred.'
+    : errorResponse.status === 404 ? buildSearchErrorMessage(errorResponse.status, 'Email not found.')
+      : buildSearchErrorMessage(errorResponse.status, errorResponse.error.message)
+
+  return throwError(msg)
+}
+
+export const buildSearchErrorMessage = (status: number, message: string): ISearchError => {
+  return {
+    status,
+    message
+  }
+}
+
+export interface ISearchError {
+  status: number
+  message: string
+}
+
+export interface IFloApiResponse {
+  meta: any
+  data: any
 }
