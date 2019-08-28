@@ -6,6 +6,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { LoginGuard } from './guards/login.guard'
 import { UsersGuard } from './guards/users.guard'
 import { UserService } from './services/user.service'
+import { EmailValidators } from './validators/email.validators'
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { UserService } from './services/user.service'
       multi: true
     },
     AuthService,
+    EmailValidators,
     LoginGuard,
     UsersGuard,
     UserService

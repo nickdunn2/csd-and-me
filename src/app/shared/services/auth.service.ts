@@ -165,4 +165,3 @@ export function buildLoginErrorMessage(status: number, message: string): ILoginE
     message
   }
 }
-

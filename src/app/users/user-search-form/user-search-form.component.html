@@ -1,11 +1,14 @@
 <div class="user-search-form-wrapper">
-  <form class="user-search-form" [formGroup]="userSearchForm">
+  <form [formGroup]="userSearchForm" (ngSubmit)="search()" novalidate>
     <div class="form-field">
       <!-- <div class="icon-wrapper">
         <span class="icon"><i class="fas fa-user"></i></span>
       </div> -->
       <!-- label? -->
       <input type="text" id="email" class="form-input" name="email" formControlName="email" placeholder="Email">
+    </div>
+    <div *ngIf="showEmailError()" class="error-box">
+      <p class="error-msg">email does not exist</p>
     </div>
     <div class="form-field">
       <input type="text" id="username" class="form-input" name="username" formControlName="username"
@@ -32,7 +35,7 @@
         formControlName="stripeCustomerId" placeholder="Stripe Customer Id (must be exact)">
     </div>
     <div class="form-button">
-      <button type="submit" class="button submit-button" (click)="search()">Search</button>
+      <button type="submit" class="button submit-button" [disabled]="!userSearchForm.valid">Search</button>
       <!-- <button type="submit" class="button submit-button" (click)="search()" [disabled]="!canSubmitForm">Search<i
           class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button> -->
     </div>
