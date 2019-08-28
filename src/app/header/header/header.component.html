@@ -6,7 +6,7 @@
     <div class="user-wrapper">
       <p *ngIf="user$ | async as user" class="user-details"><span class="icon"><i class="fas fa-user"></i></span>
         {{ user.email }}</p>
-      <button class="logout-button">Log out</button>
+      <button class="logout-button" (click)="logout()">Log out</button>
     </div>
   </div>
 </div>
