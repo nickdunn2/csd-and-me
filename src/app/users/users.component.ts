@@ -9,15 +9,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent {
-  public user$ = this.auth.user$
-  constructor(
-    private auth: AuthService,
-    private userService: UserService
-  ) { }
-
-  public logout() {
-    this.auth.logout()
-  }
+  constructor(private userService: UserService) { }
 
   public searchByEmail(email: string) {
     this.userService.searchByEmail(email)

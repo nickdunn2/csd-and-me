@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component'
 import { LoginGuard } from './shared/guards/login.guard'
 import { UsersGuard } from './shared/guards/users.guard'
 import { UserSearchFormComponent } from './users/user-search-form/user-search-form.component'
+import { HeaderComponent } from './header/header/header.component'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     LoginComponent,
     UsersComponent,
     UserSearchFormComponent
