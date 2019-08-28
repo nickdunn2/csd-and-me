@@ -1,11 +1,12 @@
 <div class="header-outer-wrapper">
   <div class="header-inner-wrapper">
     <div class="logo-wrapper">
-      <p>logo</p>
+      <p>FloSports CSD (logo?)</p>
     </div>
     <div class="user-wrapper">
-      <p *ngIf="user$ | async as user">Logged in as: {{ user.email }}</p>
-      <button>Log out</button>
+      <p *ngIf="user$ | async as user" class="user-details"><span class="icon"><i class="fas fa-user"></i></span>
+        {{ user.email }}</p>
+      <button class="logout-button">Log out</button>
     </div>
   </div>
 </div>
