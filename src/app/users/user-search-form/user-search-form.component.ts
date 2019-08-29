@@ -95,11 +95,11 @@ export class UserSearchFormComponent {
     // ],
     email: ['', [Validators.required, Validators.email], [this.emailValidators.validateEmailExists()]],
     username: [],
-    creditCard: [],
     phoneNumber: [],
     firstName: [],
     lastName: [],
-    stripeCustomerId: []
+    stripeCustomerId: [],
+    creditCard: []
   })
 
   @Output() readonly genericSearchSubmitted = new EventEmitter<IUserSearch>()
@@ -151,9 +151,9 @@ export class UserSearchFormComponent {
 export const isEmailOnly = (data: IUserSearch) => {
   return !!data.email &&
     !data.username &&
-    !data.creditCard &&
     !data.phoneNumber &&
     !data.firstName &&
     !data.lastName &&
-    !data.stripeCustomerId
+    !data.stripeCustomerId &&
+    !data.creditCard
 }

@@ -1,0 +1,36 @@
+.user-search-form-outer-wrapper {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    // grid-auto-rows: 200px;
+    grid-gap: 20px;
+
+    .form-field > input {
+      width: 100%;
+    }
+
+    .first-third {
+      grid-column: 1 / 3;
+    }
+
+    .middle-third {
+      grid-column: 3 / 5;
+    }
+
+    .last-third {
+      grid-column: 5 / 7;
+    }
+
+    .first-half {
+      grid-column: 1 / 4;
+    }
+
+    .second-half {
+      grid-column: 4 / 7;
+    }
+  }
+}

@@ -1,43 +1,45 @@
-<div class="user-search-form-wrapper">
-  <form [formGroup]="userSearchForm" (ngSubmit)="search()" novalidate>
-    <div class="form-field">
-      <!-- <div class="icon-wrapper">
-        <span class="icon"><i class="fas fa-user"></i></span>
-      </div> -->
-      <!-- label? -->
-      <input type="text" id="email" class="form-input" name="email" formControlName="email" placeholder="Email">
-    </div>
-    <div *ngIf="showEmailError()" class="error-box">
-      <p class="error-msg">email does not exist</p>
-    </div>
-    <div class="form-field">
-      <input type="text" id="username" class="form-input" name="username" formControlName="username"
-        placeholder="Username">
-    </div>
-    <div class="form-field">
-      <input type="text" id="credit-card" class="form-input" name="credit-card" formControlName="creditCard"
-        placeholder="Credit Card (last 4 digits)">
-    </div>
-    <div class="form-field">
-      <input type="text" id="phone-number" class="form-input" name="phone-number" formControlName="phoneNumber"
-        placeholder="Phone Number">
-    </div>
-    <div class="form-field">
-      <input type="text" id="first-name" class="form-input" name="first-name" formControlName="firstName"
-        placeholder="First Name">
-    </div>
-    <div class="form-field">
-      <input type="text" id="last-name" class="form-input" name="last-name" formControlName="lastName"
-        placeholder="Last Name">
-    </div>
-    <div class="form-field">
-      <input type="text" id="stripe-customer-id" class="form-input" name="stripe-customer-id"
-        formControlName="stripeCustomerId" placeholder="Stripe Customer Id (must be exact)">
-    </div>
-    <div class="form-button">
-      <button type="submit" class="button submit-button" [disabled]="!userSearchForm.valid">Search</button>
-      <!-- <button type="submit" class="button submit-button" (click)="search()" [disabled]="!canSubmitForm">Search<i
-          class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button> -->
-    </div>
-  </form>
+<div class="user-search-form-outer-wrapper">
+  <div class="user-search-form-inner-wrapper">
+    <form [formGroup]="userSearchForm" (ngSubmit)="search()" novalidate>
+      <div class="form-field first-third">
+        <!-- <div class="icon-wrapper">
+              <span class="icon"><i class="fas fa-user"></i></span>
+            </div> -->
+        <!-- label? -->
+        <input type="text" id="email" class="form-input" name="email" formControlName="email" placeholder="Email">
+      </div>
+      <div *ngIf="showEmailError()" class="error-box">
+        <p class="error-msg">email does not exist</p>
+      </div>
+      <div class="form-field middle-third">
+        <input type="text" id="username" class="form-input" name="username" formControlName="username"
+          placeholder="Username">
+      </div>
+      <div class="form-field last-third">
+        <input type="text" id="phone-number" class="form-input" name="phone-number" formControlName="phoneNumber"
+          placeholder="Phone Number">
+      </div>
+      <div class="form-field first-half">
+        <input type="text" id="first-name" class="form-input" name="first-name" formControlName="firstName"
+          placeholder="First Name">
+      </div>
+      <div class="form-field second-half">
+        <input type="text" id="last-name" class="form-input" name="last-name" formControlName="lastName"
+          placeholder="Last Name">
+      </div>
+      <div class="form-field first-half">
+        <input type="text" id="stripe-customer-id" class="form-input" name="stripe-customer-id"
+          formControlName="stripeCustomerId" placeholder="Stripe Customer Id (must be exact)">
+      </div>
+      <div class="form-field second-half">
+        <input type="text" id="credit-card" class="form-input" name="credit-card" formControlName="creditCard"
+          placeholder="Credit Card (last 4 digits)">
+      </div>
+      <div class="form-button middle-third">
+        <button type="submit" class="button submit-button" [disabled]="!userSearchForm.valid">Search</button>
+        <!-- <button type="submit" class="button submit-button" (click)="search()" [disabled]="!canSubmitForm">Search<i
+                class="fa fa-spinner fa-spin fa-fw" *ngIf="formSubmitting"></i></button> -->
+      </div>
+    </form>
+  </div>
 </div>
