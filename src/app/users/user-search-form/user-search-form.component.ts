@@ -93,7 +93,7 @@ export class UserSearchFormComponent {
     //   [validateEmail],
     //   [this.duplicateAsyncValidators.validateUnclaimedAccountExists()]
     // ],
-    email: ['', [Validators.required, Validators.email], [this.emailValidators.validateEmailExists()]],
+    email: ['', [Validators.email], [this.emailValidators.validateEmailExists()]],
     username: [],
     phoneNumber: [],
     firstName: [],
